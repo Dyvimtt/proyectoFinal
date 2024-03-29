@@ -8,5 +8,9 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class PanelInternoComponent{
 
+  activeSubMenu: string = ''; // Almacena el identificador de la sección de menú activa
 
+  toggleSubMenu(menuItem: string) {
+    this.activeSubMenu = (this.activeSubMenu === menuItem) ? '' : menuItem; // Alternar la visibilidad del submenú
+  }
 }

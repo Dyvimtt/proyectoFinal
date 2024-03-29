@@ -4,46 +4,56 @@
   </div>
 </header>
   <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 lg:pt-28 bg-gray-700">
-      <div class="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between">
-          <div>
-              <ul class="space-y-2 mt-6 font-medium text-white">
-                  <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-2 hover:text-blue-200">
-                      <a href="#">
-                          <span class="flex-1 ms-3">Inicio</span>
-                      </a>
-                  </li>
-                  <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3 hover:text-blue-200">
-                      <a href="#">
-                          <span class="flex-1 ms-3 whitespace-nowrap">Empleados</span>
-                      </a>
-                  </li>
-                  <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3 hover:text-blue-200">
-                      <a href="#">
-                          <span class="flex-1 ms-3 whitespace-nowrap">Proyectos</span>
-                      </a>
-                  </li>
-                  <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3 hover:text-blue-200">
-                      <a href="#">
-                          <span class="flex-1 ms-3 whitespace-nowrap">Facturas</span>
-                      </a>
-                  </li>
-                  <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3 hover:text-blue-200">
-                      <a href="#">
-                          <span class="flex-1 ms-3 whitespace-nowrap">Proveedores</span>
-                      </a>
-                  </li>
+    <div class="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between">
+      <div>
+        <ul class="space-y-2 mt-6 font-medium text-white">
+          <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-2 hover:text-blue-200">
+            <a href="#">
+              <span class="flex-1 ms-3">Inicio</span>
+            </a>
+          </li>
+          <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3">
+                <span (click)="toggleSubMenu('empleados')" class="flex-1 ms-3 hover:text-blue-200 cursor-pointer">Empleados</span>
+              <!-- Submenú de Empleados -->
+              <ul class="ml-6 mt-2 space-y-2" *ngIf="activeSubMenu === 'empleados'">
+                <li><a href="#" class="hover:text-blue-200">Nuevo empleado</a></li>
+                <li><a href="#" class="hover:text-blue-200">Consultar empleados</a></li>
+                <li><a href="#" class="hover:text-blue-200">Documentación empleados</a></li>
               </ul>
-          </div>
-          <!-- Contenedor del botón "Desconectar" -->
-          <div class="mt-6 mb-6 p-1 font-medium text-white hover:border-2 hover:border-blue-200 hover:text-blue-200 rounded-xl">
-              <a href="#">
-                  <span class="flex-1 ms-3">Desconectar</span>
-              </a>
-          </div>
+            </li>
+          <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3">
+              <span (click)="toggleSubMenu('proyectos')" class="flex-1 ms-3 whitespace-nowrap hover:text-blue-200 cursor-pointer">Proyectos</span>
+              <ul class="ml-6 mt-2 space-y-2" *ngIf="activeSubMenu === 'proyectos'">
+                <li><a href="#" class="hover:text-blue-200">Añadir nuevo proyecto</a></li>
+                <li><a href="#" class="hover:text-blue-200">Consultar proyecto actual</a></li>
+              </ul>
+          </li>
+          <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3">
+              <span (click)="toggleSubMenu('facturas')" class="flex-1 ms-3 whitespace-nowrap hover:text-blue-200 cursor-pointer">Facturas</span>
+              <ul class="ml-6 mt-2 space-y-2" *ngIf="activeSubMenu === 'facturas'">
+                <li><a href="#" class="hover:text-blue-200">Añadir factura</a></li>
+                <li><a href="#" class="hover:text-blue-200">Consultar facturas</a></li>
+              </ul>
+          </li>
+          <li class="border-b hover:border-b-2 hover:border-blue-200 border-gray-500 pb-3 ">
+              <span (click)="toggleSubMenu('proveedores')" class="flex-1 ms-3 whitespace-nowrap hover:text-blue-200 cursor-pointer">Proveedores</span>
+              <ul class="ml-6 mt-2 space-y-2" *ngIf="activeSubMenu === 'proveedores'">
+                <li><a href="#" class="hover:text-blue-200">Añadir proveedor</a></li>
+                <li><a href="#" class="hover:text-blue-200">Consultar proveedores</a></li>
+              </ul>
+          </li>
+        </ul>
       </div>
+      <!-- Contenedor del botón "Desconectar" -->
+      <div class="mt-6 mb-6 p-1 font-medium text-white hover:border-2 hover:border-blue-200 hover:text-blue-200 rounded-xl">
+        <a href="#">
+          <span class="flex-1 ms-3">Desconectar</span>
+        </a>
+      </div>
+    </div>
   </aside>
-<div class="p-4 sm:ml-64">
-  <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg  mt-20">
+<div class=" sm:ml-64">
+  <div class="p-9  bg-gray-300 h-max mt-20">
         <app-mod-documentos></app-mod-documentos>
   </div>
 </div>
