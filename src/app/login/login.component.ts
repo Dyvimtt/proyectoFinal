@@ -1,21 +1,30 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AutorizacionService } from '../services/autorizacion.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
-  username: string = '';
+  email: string = '';
   password: string = '';
+  error: string = '';
 
-  constructor() { }
+  constructor(private autorizacionService: AutorizacionService,private router: Router) { }
 
   onSubmit(): void {
-    // Aquí puedes agregar la lógica para autenticar al usuario
-    // Por ahora, simplemente imprimiremos los datos en la consola
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+    this.autorizacionService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        console.log('Login successful', response);
+        this.error = '';
+        this.router.navigate(['/panel-interno']);
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+        this.error = 'Usuario o contraseña incorrectos';
+      }
+    });
   }
 }

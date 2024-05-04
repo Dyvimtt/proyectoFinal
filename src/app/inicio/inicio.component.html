@@ -1,4 +1,223 @@
-<app-header></app-header>
-<section class="bg-inicio bg-cover w-screen h-[500px] mt-4 flex items-center">
-  <p class="text-white mx-auto mt-40 text-4xl w-[50%]">Expertos en montaje de estructuras industriales atornilladas, maquinaria y cerramientos</p>
-</section>
+<div class="font-principal content">
+  <header>
+    <nav class="h-20 container mx-auto flex items-center justify-between pt-6 mb-6">
+      <div class="w-1/3">
+        <a class="flex max-w-[140px] items-center pr-16">
+          <img src="assets/logo2.png" alt="logo Montaje Industrial Manises" class="w-20">
+          <p class="text-xl text-dark-blue font-bold whitespace-nowrap justify-center">Montaje Industrial Manises</p>
+        </a>
+      </div>
+
+      <input type="checkbox" id="menu1" class="peer hidden" [(ngModel)]="isMenuOpen">
+
+      <label for="menu1" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu z-50 md:hidden mr-3"></label>
+      <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform md:static md:bg-none md:translate-x-0 z-50">
+        <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md text-center grid gap-6 font-bold text-dark-blue shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static">
+          <li><a (click)="scrollToSection('seccion1')" class="hover:cursor-pointer">Inicio</a></li>
+          <li><a (click)="scrollToSection('seccion2')" class="hover:cursor-pointer">Empresa</a></li>
+          <li><a (click)="scrollToSection('seccion3')" class="hover:cursor-pointer">Servicios</a></li>
+          <li><a (click)="scrollToSection('seccion4')" class="hover:cursor-pointer">Galeria</a></li>
+          <li><a (click)="scrollToSection('seccion5')" class="hover:cursor-pointer">Contacto</a></li>
+        </ul>
+      </div>
+      <a routerLink="/login" class="hidden boton lg:block py-3 shadow-sm shadow-bright-red/30">Área privada</a>
+    </nav>
+
+    <section class="z-10 wrapper grid gap-8 justify-items-center items-center pb-12 pt-12 md:grid-cols-2 md:mb-20 md:mt-12 md:py-48 bg-cover bg-center text-white relative" style="background-image: url('assets/fotosProyectos/4edit.jpg');">
+      <div class="absolute inset-0 bg-black opacity-50"></div>
+      <article class="text-center space-y-6 md:text-left md:space-y-8 md:pl-6 ml-8 z-20 relative">
+        <h1 class="text-4xl font-bold md:text-5xl">Especialistas en montaje industrial atornillado y trabajos en altura</h1>
+        <p class="text-base md:text-xl">En <span class="underline">Montaje Industrial Manises</span> nos enorgullecemos de ser líderes en el campo del montaje industrial atornillado y trabajos en altura...</p>
+      </article>
+    </section>
+  </header>
+
+  <main>
+    <section id="seccion2" class="wrapper text-center md:py-36 py-24 grid gap-12 md:grid-cols-2 md:text-left bg-gray-200">
+      <article class="md:mx-8">
+        <h2 class="text-3xl font-bold text-dark-blue mx-4 md:text-4xl mb-4">
+          ¿QUIÉNES SOMOS?
+        </h2>
+        <p class="text-gray-500 font-semibold mx-4">
+          Especialistas en montaje de estructuras metálicas. Contamos con un equipo de profesionales con más de 20 años de reconocida experiencia en el
+          sector, con formación actualizada en prevención de riesgos laborales y normativa vigente. Nuestro personal realiza asiduamente formaciones de reciclaje y ampliación.
+        </p>
+      </article>
+      <div class="grid gap-12">
+
+        <article class="space-y-4 md:space-y-6">
+          <p class="bg-very-pale-red rounded-l-full mx-6 font-bold flex items-center md:bg-transparent">
+            <span class="bg-bright-red text-white px-6 rounded-full py-2">01</span>
+            <span class="flex-1 p-2 text-dark-blue text-lg">
+              MISIÓN
+            </span>
+          </p>
+          <p class="text-gray-500 font-semibold text-left mx-6">
+            Solventar las necesidades de nuestros clientes en montaje y mantenimiento industrial. Esto lo logramos a través de la flexibilidad y versatilidad de nuestros recursos,
+            teniendo en cuenta la seguridad de nuestro personal, la máxima eficiencia de los procesos y el respeto por el medio ambiente.
+          </p>
+        </article>
+
+        <article class="space-y-4 md:space-y-6">
+          <p class="bg-very-pale-red rounded-l-full mx-6 font-bold flex items-center md:bg-transparent">
+            <span class="bg-bright-red text-white px-6 rounded-full py-2">02</span>
+            <span class="flex-1 p-2 text-dark-blue text-lg">
+              VISIÓN
+            </span>
+          </p>
+          <p class="text-gray-500 font-semibold text-left mx-6">
+            Nuestro propósito es mejorar y ampliar continuamente en todos nuestros departamentos, utilizando los medios apropiados y cuidando del cliente, con pasión y entusiasmo.
+          </p>
+        </article>
+
+        <article class="space-y-4 md:space-y-6">
+          <p class="bg-very-pale-red rounded-l-full mx-6 font-bold flex items-center md:bg-transparent">
+            <span class="bg-bright-red text-very-light-gray px-6 rounded-full py-2">03</span>
+            <span class="flex-1 p-2 text-dark-blue text-lg">
+              VALORES
+            </span>
+          </p>
+          <p class="text-gray-500 font-semibold text-left mx-6">
+            Trabajo en equipo, compromiso, calidad, innovación, estandarización de buenas prácticas, todo ello cuidando la seguridad, la calidad y el medio ambiente, así como la formación
+            continua para el desarrollo vocacional, responsabilidad y orientación a resultados. Además, se valora la confianza de clientes y empleados, la honestidad de todos los empleados
+            y la transparencia con los clientes.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="seccion3" class="container mx-auto md:py-64 px-8 py-8">
+      <h2 class="block antialiased tracking-normal  text-dark-blue font-bold !text-3xl !leading-snug lg:!text-4xl">¿Qué ofrecemos?</h2>
+      <p class="block antialiased text-xl leading-relaxed text-inherit mt-2 w-full  !text-gray-500 lg:w-5/12">Nos adaptamos a las <span class="font-semibold">necesidades específicas</span> de cada proyecto: </p>
+      <div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <div class="flex-col bg-clip-border  bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="assets/fotosProyectos/8edit1.png" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
+          <div class="absolute inset-0 bg-black/70"></div>
+          <div class="p-6 relative flex flex-col justify-end">
+            <h4 class="block antialiased tracking-normal  text-2xl font-semibold leading-snug text-very-light-gray">¿Cómo lo hacemos? </h4>
+            <p class="block antialiased text-base font-light leading-relaxed text-very-light-gray my-2">Organizando al equipo para que cuente con el personal idóneo para cada trabajo:
+              estimando de manera precisa el tiempo y costes necesarios para llevar a cabo el proyecto, asesorando, empleando herramienta moderna y precisa y formándonos continuamente.</p>
+          </div>
+        </div>
+        <div class=" flex-col bg-clip-border bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="assets/fotosProyectos/7edit.png" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
+          <div class="absolute inset-0 bg-black/70"></div>
+          <div class="p-6 relative flex flex-col justify-end">
+            <h4 class="block antialiased tracking-normal  text-2xl font-semibold leading-snug text-very-light-gray">¿Dónde trabajamos?</h4>
+            <p class="block antialiased text-base font-light leading-relaxed text-very-light-gray my-2">Nuestra sede se localiza en Valencia, aunque nuestra actividad se desarrolla tanto en territorio nacional (península e islas) como internacional.</p>
+          </div>
+        </div>
+        <div class=" flex-col bg-clip-border  bg-transparent text-gray-700 shadow-md relative grid min-h-[30rem] items-end overflow-hidden rounded-xl"><img src="assets/fotosProyectos/9edit.png" alt="bg" class="absolute inset-0 h-full w-full object-cover object-center" />
+          <div class="absolute inset-0 bg-black/70"></div>
+          <div class="p-6 relative flex flex-col justify-end">
+            <h4 class="block antialiased tracking-normal  text-2xl font-semibold leading-snug text-very-light-gray">¿Qué proyectos llevamos a cabo?</h4>
+            <p class="block antialiased text-base font-light leading-relaxed text-very-light-gray my-2">Montajes e instalaciones metálicas para transportes, puertos, obras hidráulicas, puentes, postes y torres metálicas, entre otros. <a (click)="scrollToSection('seccion4')" class="hover:cursor-pointer underline">VER GALERÍA</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-gray-200 py-12" id="seccion4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-12">
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/1.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/2.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/3.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/4.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/5.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/6.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/7.JPG" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/8.JPG" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/img-inicio.jpg" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/10.JPG" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/11.JPG" alt="">
+        </div>
+        <div>
+            <img class="h-auto max-w-full rounded-lg" src="assets/fotosProyectos/12.JPG" alt="">
+        </div>
+    </div>
+    </section>
+    <section class="bg-bright-red md:pt-20" id="seccion5">
+      <div class="wrapper py-24 text-center grid gap-6 md:grid-cols-[40%_40%] md:justify-between md:items-center md:text-left md:mx-8">
+        <h2 class="text-6xl text-very-pale-red mx-auto font-bold">
+          Contacta con nosotros
+        </h2>
+        <div class="grid">
+          <form class="grid grid-cols-1 gap-4 text-very-light-gray font-semibold ">
+            <div>
+              <label for="nombre" class="block mb-1">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" class="w-1/2 px-2 py-1 border rounded" required>
+            </div>
+            <div>
+              <label for="email" class="block mb-1">Correo electrónico:</label>
+              <input type="email" id="email" name="email" class="w-1/2 px-2 py-1 border rounded" required>
+            </div>
+            <div>
+            <label for="sujeto" class="block mb-1">Asunto</label>
+            <input type="sujeto" id="sujeto" name="sujeto" class="w-1/2 px-2 py-1 border rounded" required>
+            </div>
+            <div>
+              <label for="mensaje" class="block mb-1">Mensaje:</label>
+              <textarea id="mensaje" name="mensaje" rows="4" class="w-1/2 px-2 py-1 border rounded" required></textarea>
+            </div>
+          </form>
+          <button type="submit" class="mx-auto md:mx-0 mt-6 bg-very-light-gray font-semibold shadow-sm shadow-slate-200/30 boton text-bright-red">Enviar</button>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-very-dark-blue pt-12 pb-12">
+    <section class="wrapper grid gap-8 justify-items-center footer-area px-6 md:footer-area-md md:grid-cols-3 md:justify-items-stretch">
+      <nav class="grid grid-cols-[max-content_max-content] justify-between text-very-light-gray font-semibold w-3/5 gap-y-2 [grid-area:navigation] pl-12">
+        <a (click)="scrollToSection('seccion1')" class="hover:cursor-pointer">Inicio</a>
+        <a (click)="scrollToSection('seccion2')" class="hover:cursor-pointer">Empresa</a>
+        <a (click)="scrollToSection('seccion3')" class="hover:cursor-pointer">Servicios</a>
+        <a (click)="scrollToSection('seccion4')" class="hover:cursor-pointer">Galeria</a>
+        <a (click)="scrollToSection('seccion5')" class="hover:cursor-pointer">Contacto</a>
+      </nav>
+      <div class="flex flex-wrap md:gap-4 md:mx-6 gap-1 justify-between items-center pr-20 pl-20  sm:pr-30 md:pl-0 md:pr-60 w-full [grid-area:form]">
+        <a href="#">
+          <img src="assets/icon-facebook.svg" alt="enlace a facebook" class="w-8">
+        </a>
+        <a href="#">
+          <img src="assets/icon-youtube.svg" alt="enlace a youtube" class="w-8">
+        </a>
+        <a href="#">
+          <img src="assets/icon-twitter.svg" alt="enlace a twitter" class="w-8">
+        </a>
+        <a href="#">
+          <img src="assets/icon-pinterest.svg" alt="enlace a pinterest" class="w-8">
+        </a>
+        <a href="#">
+          <img src="assets/icon-instagram.svg" alt="enlace a instagram" class="w-8">
+        </a>
+      </div>
+      <a href="./" class="flex max-w-[180px] items-center mr-36 [grid-area:logo]">
+        <img src="assets/logo2.png" alt="logo Montaje Industrial Manises" class=" w-1/2">
+        <p class="w-1/2 text-white pl-2 text-xl font-bold whitespace-nowrap justify-center">Montaje Industrial Manises</p>
+      </a>
+      <p class="text-dark-grayish-blue text-center [grid-area:copy] md:pr-20">
+        Copyright 2024. All Rights Reserved
+      </p>
+    </section>
+  </footer>
+</div>
+

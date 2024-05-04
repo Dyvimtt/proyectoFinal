@@ -1,0 +1,61 @@
+<div class="h-1/2 w-1/2 mx-auto mt-2 p-10 flex-grow text-center">
+  <h2 class="text-4xl text-dark-blue font-bold mb-6">Añadir Factura</h2>
+  <hr class="border-dark-blue">
+  <div class="font-bold  mx-auto mt-4 inline-block">
+    <form class="font-bold mx-auto grid grid-cols-2 gap-6" (ngSubmit)="submitForm()">
+      <div class="mx-2 mt-6">
+        <label class="block text-left mb-2" for="numeroFactura">Número de Factura:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="numeroFactura" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" placeholder="Número de Factura" required>
+      </div>
+      <div class="mx-2 mt-6">
+        <label class="block text-left mb-2" for="nombre">Contexto de factura:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="nombre" [(ngModel)]="nombre" name="nombre" type="text" placeholder="Contexto de factura" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="idProveedor">ID del Proveedor:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="idProveedor" [(ngModel)]="proveedorId" name="idProveedor" type="text" placeholder="ID del Proveedor" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="importe">Importe:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="importe" [(ngModel)]="importe" name="importe" type="number" placeholder="Importe" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="proyecto">ID del Proyecto:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="proyecto" [(ngModel)]="proyecto" name="proyecto" type="number" placeholder="Proyecto" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="tipoTransaccion">Tipo de Transacción:</label>
+        <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="tipoTransaccion" [(ngModel)]="tipoTransaccion" name="tipoTransaccion" required>
+          <option value="Ingreso">Ingreso</option>
+          <option value="Factura">Factura</option>
+        </select>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="fecha">Fecha:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+               id="fecha"
+               [(ngModel)]="fecha"
+               name="fecha"
+               type="date"
+               placeholder="Fecha"
+               required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="estado">Estado:</label>
+        <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="estado" [(ngModel)]="estado" name="estado" required>
+          <option [value]="true">Pagada</option>
+          <option [value]="false">Pendiente de Pago</option>
+        </select>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="captura">Captura:</label>
+        <input type="file" id="captura" name="captura" accept="image/*" class="py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline">
+      </div>
+      <div class="flex items-center justify-center">
+        <button class="bg-bright-red mt-6 hover:bg-red-600 text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Añadir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

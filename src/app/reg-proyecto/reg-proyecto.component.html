@@ -1,0 +1,33 @@
+<div class="h-1/2 w-1/2 mx-auto mt-4 p-10  flex-grow text-center">
+  <h2 class="text-4xl font-bold mb-6 text-dark-blue">Añadir Proyecto</h2>
+  <hr class="border-dark-blue">
+  <div class="font-bold  mx-auto inline-block mt-10">
+    <form class="font-bold  mx-auto text-center" (ngSubmit)="submitForm()">
+        <div class="mb-3 pt-6 text-lg">
+            <label class="block text-lg text-left mb-2" for="nombre">Nombre:</label>
+            <input class="appearance-none border rounded  w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="nombre" type="text" placeholder="Nombre" required [(ngModel)]="nombre" name="nombre">
+        </div>
+        <div class="mb-3">
+            <label class="block text-lg text-left mb-2" for="ciudad">Ciudad:</label>
+            <input class="appearance-none border rounded  w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="ciudad" type="text" placeholder="Ciudad" required [(ngModel)]="ciudad" name="ciudad">
+        </div>
+        <div class="mb-3">
+            <label class="block text-lg text-left mb-2" for="presupuesto">Presupuesto:</label>
+            <input class="appearance-none border rounded  w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="presupuesto" type="number" placeholder="Presupuesto" required [(ngModel)]="presupuesto" name="presupuesto">
+        </div>
+        <div class="mb-3">
+            <label class="block text-lg text-left mb-2" for="fechaInicio">Fecha Inicio:</label>
+            <input class="appearance-none border rounded  w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="fechaInicio" type="date" required [(ngModel)]="fechaInicio" name="fechaInicio">
+        </div>
+        <div class="mb-3">
+            <label class="block text-lg text-left mb-2" for="fechaFinal">Fecha Final:</label>
+            <input class="appearance-none border rounded  w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="fechaFinal" type="date" required [(ngModel)]="fechaFinal" name="fechaFinal">
+        </div>
+        <div class="flex items-center justify-center">
+            <button class="bg-bright-red mt-6 hover:bg-red-600 text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Añadir
+            </button>
+        </div>
+    </form>
+  </div>
+</div>

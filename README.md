@@ -33,3 +33,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ![alt text](dw-image.png)
 
 https://miro.com/app/board/uXjVKe_9eEo=/
+
+### Utilizamos el ID trabajador 500 para las facturas

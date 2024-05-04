@@ -1,0 +1,55 @@
+<div class="flex mx-auto h-1/2 w-auto mt-6 p-20 flex-grow py-8 ">
+  <div class= "w-1/2 ml-10 inline-block">
+    <div class="w-1/2" *ngIf="usuario">
+      <img  class="h-40 mb-6 rounded-xl" src="{{usuario.url_photo}}" alt="Foto del empleado">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Detalle empleado</h2>
+      <hr class="border my-auto h-px border-dark-blue">
+      <div class="mb-4 mt-10 text-lg grid gap-3">
+        <p><span class="font-bold mb-3">ID:</span> {{ usuario.id }}</p>
+        <p><span class="font-bold mb-3">Nombre:</span> {{ usuario.nombre }}</p>
+        <p><span class="font-bold mb-3">Apellido:</span> {{ usuario.apellido }}</p>
+        <p><span class="font-bold mb-3">DNI:</span> {{ usuario.dni }}</p>
+        <p><span class="font-bold mb-3">Email:</span> {{ usuario.email }}</p>
+        <p><span class="font-bold mb-3">Teléfono:</span> {{ usuario.telefono }}</p>
+        <p><span class="font-bold mb-3">Rol:</span> {{ usuario.rol }}</p>
+        <p><span class="font-bold mb-3">Fecha de contratación:</span> {{ usuario.fechaRegistro }}</p>
+      </div>
+      <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="abrirFormularioAgregarDocumento()">Modificar empleado</button>
+    </div>
+    <div *ngIf="!usuario">
+      <p>Cargando usuario...</p>
+    </div>
+  </div>
+  <div class="w-1/2 ml-4 inline-block mt-10">
+    <h2 class="text-2xl font-bold mb-4 text-dark-blue">Documentos del empleado</h2>
+    <hr class="border border-dark-blue my-auto h-px">
+    <div *ngIf="documentos.length > 0">
+      <table class="table-auto mt-10">
+        <thead>
+          <tr class="bg-gray-300">
+            <th class="px-4 py-2">Id del documento</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Fecha de Subida</th>
+            <th class="px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-200">
+          <tr *ngFor="let documento of documentos">
+            <td class="border px-4 py-2">{{ documento.id }}</td>
+            <td class="border px-4 py-2">{{ documento.nombre }}</td>
+            <td class="border px-4 py-2">{{ documento.fechaSubida }}</td>
+            <td class="border px-4 py-2"><a href="{{ documento.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Documento</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="documentos.length === 0">
+      <p>No hay documentos asociados a este usuario.</p>
+    </div>
+    <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="abrirFormularioAgregarDocumento()">Añadir documento</button>
+  </div>
+
+</div>
+
+
+

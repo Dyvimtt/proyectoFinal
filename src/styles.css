@@ -2,3 +2,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+
+  .contenedor{
+    @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
+  }
+
+  .boton{
+    @apply bg-bright-red text-very-light-gray block w-max py-4 px-12 rounded-full;
+  }
+
+  .footer-area{
+    grid-template-areas:
+    "form"
+    "navigation"
+    "social-media"
+    "logo"
+    "copy";
+  }
+
+  .footer-area-md{
+    grid-template-areas:
+    "logo   navigation  form"
+    "social-media   navigation  copy";
+  }
+  body::-webkit-scrollbar {
+    width: 14px;
+}
+body::-webkit-scrollbar-track {
+  background: hsl(0,0%,98%);
+}
+body::-webkit-scrollbar-thumb {
+    background: hsl(12,88%,59%);
+}
+
+}

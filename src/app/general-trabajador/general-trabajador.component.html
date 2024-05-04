@@ -1,0 +1,55 @@
+<div class="mx-auto p-2 flex-grow text-center">
+  <h2 class="text-4xl text-dark-blue font-bold mb-2">Consultar Empleados</h2>
+  <hr class="border-dark-blue">
+  <div class="font-bold mx-auto inline-block mt-2 w-full">
+    <div class="flex items-center justify-between mb-3 w-2/3 mx-auto">
+      <div class="flex-1">
+        <label class="block text-lg text-left mb-2 mt-1" for="buscarEmpleado">Buscar Empleado por Nombre:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+               id="buscarEmpleado"
+               [(ngModel)]="nombreEmpleado"
+               (input)="buscarEmpleadosPorNombre()"
+               name="buscarEmpleado"
+               type="text"
+               placeholder="Nombre del Empleado">
+      </div>
+      <a routerLink="/panel-interno/reg-trabajador/"
+         class="bg-bright-red text-white font-bold py-2 mx-4 mt-10 px-8 rounded focus:outline-none focus:shadow-outline">
+        Añadir Empleado
+      </a>
+    </div>
+    <div class="mt-10 overflow-y-auto max-h-[500px] w-full mx-auto">
+      <h3 class="text-xl text-left mb-4 font-bold">Tabla de Empleados:</h3>
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Apellido</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fecha Inicio</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">DNI</th>
+            <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Rol</th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let empleado of empleadosFiltrados">
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.id }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                <a routerLink="/panel-interno/detalle-usuario/{{ empleado.id }}" class="text-blue-500 hover:text-blue-800">
+                {{ empleado.nombre }}
+                </a>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.apellido }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.fechaRegistro }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.email }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.telefono }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.dni }}</td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ empleado.rol }}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>

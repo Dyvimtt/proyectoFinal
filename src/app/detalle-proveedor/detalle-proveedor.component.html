@@ -1,0 +1,98 @@
+<div class="flex mx-auto h-1/2 w-auto p-12 flex-grow py-1">
+  <div class="w-1/2 inline-block">
+    <div class="mt-6" *ngIf="proveedor">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Detalle del proveedor</h2>
+      <hr class="border my-auto h-px border-dark-blue">
+      <div class="mb-4 mt-10 text-lg grid gap-3">
+        <p><span class="font-bold mb-3">Nombre:</span> {{ proveedor.nombre }}</p>
+        <p><span class="font-bold mb-3">CIF:</span> {{ proveedor.cif }}</p>
+        <p><span class="font-bold mb-3">Teléfono:</span> {{ proveedor.telefono }}</p>
+        <p><span class="font-bold mb-3">Email:</span> {{ proveedor.email }}</p>
+      </div>
+      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modificar proveedor</button>
+      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Añadir Factura</button>
+    </div>
+    <div *ngIf="!proveedor">
+      <p>Cargando proveedor...</p>
+    </div>
+  </div>
+  <section class="grid grid-cols-1 ml-20 w-full">
+    <section class="w-1/2 ml-4 inline-block mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Facturas pagadas</h2>
+      <hr class="border border-dark-blue my-auto h-px">
+      <div *ngIf="facturasPagadas.length > 0">
+        <table class="table-auto mt-10">
+          <thead>
+            <tr class="bg-gray-300 text-base">
+              <th class="px-8 py-2">Id de la factura</th>
+              <th class="px-8 py-2">Tipo</th>
+              <th class="px-8 py-2">Nombre del documento</th>
+              <th class="px-8 py-2">Estado</th>
+              <th class="px-8 py-2">Número de factura</th>
+              <th class="px-8 py-2">Importe</th>
+              <th class="px-10 py-2">Fecha</th>
+              <th class="px-8 py-2">Ver factura</th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-200 text-center px-2 py-2">
+            <tr *ngFor="let factura of facturasPagadas; let even = even">
+              <td class="border py-2" >{{ factura.id }}</td>
+              <td class="border" >{{ factura.tipo }}</td>
+              <td class="border" >{{ factura.nombreDocumento }}</td>
+              <td class="border font-bold" [ngClass]="{'text-green-500': factura.pagada}">Pagada</td>
+              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border">{{ factura.importe }}</td>
+              <td class="border">{{ factura.fechaSubida }}</td>
+              <td class="border">
+                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="facturasPagadas.length === 0">
+        <p>No hay facturas pagadas asociadas a este proveedor.</p>
+      </div>
+    </section>
+
+    <!-- Facturas POR PAGAR -->
+
+    <section class="w-1/2 ml-4 inline-block mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Facturas pendiente de pago</h2>
+      <hr class="border border-dark-blue my-auto h-px">
+      <div *ngIf="facturasPorPagar.length > 0">
+        <table class="table-auto mt-10">
+          <thead>
+            <tr class="bg-gray-300 text-base">
+              <th class="px-8 py-2">Id de la factura</th>
+              <th class="px-8 py-2">Tipo</th>
+              <th class="px-8 py-2">Nombre del documento</th>
+              <th class="px-8 py-2">Estado</th>
+              <th class="px-8 py-2">Número de factura</th>
+              <th class="px-8 py-2">Importe</th>
+              <th class="px-10 py-2">Fecha</th>
+              <th class="px-8 py-2">Ver factura</th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-200 text-center px-2 py-2 ">
+            <tr *ngFor="let factura of facturasPorPagar" class="border border-b-gray-800">
+              <td class="border">{{ factura.id }}</td>
+              <td class="border">{{ factura.tipo }}</td>
+              <td class="border">{{ factura.nombreDocumento }}</td>
+              <td class="border font-bold" [ngClass]="{'text-red-600': factura.pagada}">Por Pagar</td>
+              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border">{{ factura.importe }}</td>
+              <td class="border">{{ factura.fechaSubida }}</td>
+              <td class="border">
+                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="facturasPorPagar.length === 0">
+        <p>No hay facturas por pagar asociadas a este proveedor.</p>
+      </div>
+    </section>
+  </section>
+</div>

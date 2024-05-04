@@ -2,14 +2,30 @@
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
-      backgroundImage: theme => ({
-        'inicio': "url('assets/img-inicio.jpg')",
-      })
+      fontFamily: {
+        "principal" : ['"Be Vietnam Pro"', 'sans-serif']
+      },
+      colors: {
+        "bright-red": "hsl(12,88%,59%)",
+        "dark-blue": "hsl(228,39%,23%)",
+        "dark-grayish-blue": "hsl(227,12%,61%)",
+        "very-dark-blue": "hsl(233,12%,13%)",
+        "very-pale-red": "hsl(13,100%,96%)",
+        "very-light-gray": "hsl(0,0%,98%)",
+      },
+      backgroundImage: {
+        "close-menu": "url('assets/icon-close.svg')",
+        "open-menu": "url('assets/icon-hamburger.svg')"
+      }
     },
+
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 

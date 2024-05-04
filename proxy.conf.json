@@ -1,0 +1,7 @@
+{
+  "/employees": {
+    "target": "https://dyvim.site",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

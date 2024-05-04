@@ -1,0 +1,45 @@
+<div class="mx-auto p-2 flex-grow text-center">
+  <h2 class="text-4xl text-dark-blue font-bold mb-2">Consultar proyectos</h2>
+  <hr class="border-dark-blue">
+  <div class="font-bold mx-auto inline-block mt-10 w-full">
+    <div class="flex items-center justify-between mb-3 w-2/3 mx-auto">
+      <div class="flex-1">
+        <label class="block text-lg text-left mb-2 mt-1" for="buscarProyecto">Buscar Proyecto por Nombre:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+               id="buscarProyecto"
+               [(ngModel)]="nombreProyecto"
+               (input)="buscarProyectosPorNombre()"
+               name="buscarProyecto"
+               type="text"
+               placeholder="Nombre del Proyecto">
+      </div>
+      <a routerLink="/panel-interno/reg-proyecto/"class="bg-bright-red text-white font-bold py-2 mx-4 px-8 rounded focus:outline-none focus:shadow-outline mt-10">
+        Añadir Proyecto
+      </a>
+    </div>
+    <div class="mt-10 overflow-y-auto max-h-[500px] w-2/3 mx-auto">
+      <h3 class="text-xl text-left mb-4 font-bold">Tabla de Proyectos:</h3>
+      <table class="min-w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Ciudad</th>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Presupuesto</th>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fecha de Inicio</th>
+            <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fecha Final</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proyecto of proyectosFiltrados">
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">{{ proyecto.id }}</td>
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200"><a routerLink="/panel-interno/detalle-proyecto/{{ proyecto.id }}" class="text-blue-500 hover:underline">{{ proyecto.nombre }}</a></td>
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">{{ proyecto.ciudad }}</td>
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">{{ proyecto.presupuesto | currency: 'EUR'}}</td>
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">{{ proyecto.fechaInicio | date:'dd/MM/yyyy' }}</td>
+            <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">{{ proyecto.fechaFinal | date:'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

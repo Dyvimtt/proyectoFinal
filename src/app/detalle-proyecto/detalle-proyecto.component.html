@@ -1,0 +1,57 @@
+<div class="flex mx-auto h-auto w-auto p-12 flex-grow py-1">
+  <div class="w-1/2 ml-10 inline-block">
+    <div class="mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Detalles del proyecto</h2>
+      <hr class="border my-auto h-px border-dark-blue">
+      <div class="mb-4 mt-10 text-lg grid gap-3">
+        <div class="grid grid-col-1 gap-3">
+          <p><span class="font-bold mb-3">Nombre:</span> {{ proyecto.nombre }}</p>
+          <p><span class="font-bold mb-3">Ciudad:</span> {{ proyecto.ciudad }}</p>
+          <p><span class="font-bold mb-3">Fecha de inicio:</span> {{ proyecto.fechaInicio }}</p>
+          <p><span class="font-bold mb-3">Fecha final:</span> {{ proyecto.fechaFinal }}</p>
+          <p><span class="font-bold mb-3">Presupuesto:</span><span class="font-semibold text-dark-blue pl-2"> {{ proyecto.presupuesto | currency: 'EUR' }}</span></p>
+          <p><span class="font-bold mb-3">Balance actual:</span> <span class="font-semibold pl-2" [ngClass]="{'text-green-500': balanceActual >= 0, 'text-red-500': balanceActual < 0}">{{ balanceActual | currency: 'EUR' }}</span></p>
+        </div>
+        <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline">Modificar proyecto</button>
+      </div>
+    </div>
+  </div>
+  <section class="ml-40 w-full">
+    <section class="inline-block mt-6">
+      <h2 class="text-2xl font-bold mb-4 text-dark-blue">Facturas asociadas al proyecto</h2>
+      <hr class="border border-dark-blue my-auto h-px">
+      <div *ngIf="facturas.length > 0">
+        <table class="table-auto mt-10">
+          <thead>
+            <tr class="bg-gray-300 text-base">
+              <th class="px-8 py-2">Id de la factura</th>
+              <th class="px-8 py-2">Nombre del documento</th>
+              <th class="px-8 py-2">Pagada</th>
+              <th class="px-8 py-2">Fecha de subida</th>
+              <th class="px-8 py-2">Número de factura</th>
+              <th class="px-8 py-2">Importe</th>
+              <th class="px-10 py-2">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-200 text-center px-2 py-2">
+            <tr *ngFor="let factura of facturas">
+              <td class="border py-2">{{ factura.id }}</td>
+              <td class="border">{{ factura.nombreDocumento }}</td>
+              <td class="border font-bold" [ngClass]="{'text-green-500': factura.pagada, 'text-red-500': !factura.pagada}">{{ factura.pagada ? 'Sí' : 'No' }}</td>
+              <td class="border">{{ factura.fechaSubida }}</td>
+              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border">{{ factura.importe | currency: 'EUR' }}</td>
+              <td class="border">
+                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Añadir Factura</button>
+      </div>
+      <div *ngIf="facturas.length === 0">
+        <p>No hay facturas asociadas a este proyecto.</p>
+      </div>
+    </section>
+  </section>
+</div>
