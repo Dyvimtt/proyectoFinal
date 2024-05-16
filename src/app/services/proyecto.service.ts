@@ -45,7 +45,6 @@ export class ProyectoService {
     };
   }
 
-  // Enviamos los datos con HttpHeaders ya que la api espera recibir los datos en formato x-www-form-urlencoded
   registrarProyecto(proyecto: any): Observable<any> {
     const data = this.convertirProyectoBD(proyecto);
     console.log(data);
@@ -106,4 +105,22 @@ export class ProyectoService {
     })
   );
   }
+  actualizarProyecto(proyecto: Proyecto): Observable<any> {
+    const data = this.convertirProyectoBD(proyecto);
+
+    console.log(data); // Solo para depuración, puedes eliminar esta línea cuando estés seguro de que todo funciona correctamente
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    // Construimos los parámetros de la solicitud HTTP
+    let params = new HttpParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.append(key, data[key]);
+      }
+    }
+    const url = `https://dyvim.site/projects?id=${proyecto.id}&nameId=id_project`;
+    return this.http.put<any>(url, params.toString(), { headers });
+  }
+
 }

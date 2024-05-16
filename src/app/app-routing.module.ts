@@ -11,6 +11,7 @@ import { GeneralTrabajadorComponent } from './general-trabajador/general-trabaja
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { PanelInternoComponent } from './panel-interno/panel-interno.component';
+import { RegDocumentoComponent } from './reg-documento/reg-documento.component';
 import { RegFacturaComponent } from './reg-factura/reg-factura.component';
 import { RegProveedorComponent } from './reg-proveedor/reg-proveedor.component';
 import { RegProyectoComponent } from './reg-proyecto/reg-proyecto.component';
@@ -24,8 +25,14 @@ const routes: Routes = [
   { path: 'panel-interno', component: PanelInternoComponent, canActivate: [AuthGuard], children: [
     { path: 'reg-trabajador', component: RegTrabajadorComponent },
     { path: 'reg-proyecto', component: RegProyectoComponent },
+    { path: 'reg-proyecto/:id', component: RegProyectoComponent },
     { path: 'reg-factura', component: RegFacturaComponent },
+    { path: 'reg-factura/:proveedorId',component: RegFacturaComponent},
+    { path: 'mod-factura/:facturaId',component: RegFacturaComponent},
     { path: 'reg-proveedor', component: RegProveedorComponent },
+    { path: 'reg-proveedor/:id', component: RegProveedorComponent },
+    { path: 'reg-documento/:id', component: RegDocumentoComponent },
+    { path: 'editar-trabajador/:id', component: RegTrabajadorComponent },
     { path: 'general-trabajador', component: GeneralTrabajadorComponent },
     { path: 'general-proveedor', component: GeneralProveedorComponent },
     { path: 'general-facturas' , component: GeneralFacturasComponent},

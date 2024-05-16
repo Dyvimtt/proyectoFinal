@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Documento } from '../models/documento.model';
 import { Factura } from '../models/factura.model';
 
@@ -34,6 +34,7 @@ export class DocumentoService{
     );
   }
 
+
   //Por id de proveedor
 
   obtenerFacturaPorId(id: number): Observable<Factura[]> {
@@ -58,7 +59,80 @@ export class DocumentoService{
         })
       );
   }
+
+  buscarPorNombre(nombre: string): Observable<Documento[]>{
+    return this.http.get<any>(`https://dyvim.site/documents?linkTo=document_name&search=${nombre}&select=*`)
+      .pipe(
+      map(response => {
+      if (response && response.results) {
+        return response.results.map((documento: any) => ({
+          id: documento.id_document,
+          nombre: documento.document_name,
+          fechaSubida: documento.due_date,
+          url: documento.attachment_url,
+        }));
+      } else {
+        return [];
+      }
+    })
+  );
+  }
+
+
+  convertirDocumentoBD(documento: any): any {
+    return {
+      id_employee_document: documento.id,
+      attachment_url: documento.url,
+      due_date: documento.fechaSubida,
+      document_name: documento.nombre,
+    };
+  }
+
+  //Registro documento nuevo
+
+  registrarDocumento(documento: any): Observable<any> {
+    const data = this.convertirDocumentoBD(documento);
+    console.log(data);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    let params = new HttpParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.set(key, data[key]);
+      }
+    }
+
+    return this.http.post<any>('https://dyvim.site/documents', params.toString(), { headers });
+  }
+
+  subirArchivo(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('archivo', file);  // 'archivo' es el nombre del campo que el servidor espera
+
+    return this.http.post(`https://dyvim.site/upload`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
+
+  // Actualizar documento
+
+  actualizarDocumento(id: number, valor: string): Observable<any> {
+    // Configura la URL con el parámetro id directamente en la URL
+    const url = `https://dyvim.site/documents?id=${id}&nameId=id`;
+    let body = new HttpParams()
+      .set('attachment_url', valor);
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.put(url, body.toString(), { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al actualizar el documento:', error);
+          return throwError(() => new Error('Error al actualizar, por favor intenta de nuevo más tarde'));
+        })
+      );
+  }
 }
+
+
 
 
 

@@ -1,57 +1,68 @@
-<div class="h-1/2 w-1/2 mx-auto  p-2 flex-grow text-center">
+<div class="h-1/2 w-1/2 mx-auto p-2 flex-grow text-center">
   <h2 class="text-4xl text-dark-blue font-bold mb-6">Introducir nuevo personal</h2>
   <hr class="border-dark-blue">
-  <div class="font-bold  mx-auto inline-block">
-    <form class="grid grid-cols-2 gap-4"(ngSubmit)="submitForm()">
-        <div class="mb-3 pt-6 mx-6">
-            <label class="block text-m text-left mb-2" for="nombre">Nombre:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="nombre" type="text" placeholder="Nombre" required [(ngModel)]="nombre" name="nombre">
+  <div class="font-bold mx-auto inline-block">
+    <form class="grid grid-cols-2 gap-4" #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+      <div class="mb-3 pt-6 mx-6">
+        <label class="block text-m text-left mb-2" for="nombre">Nombre:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="nombre" type="text" placeholder="Nombre" required [(ngModel)]="usuario.nombre" name="nombre">
+      </div>
+      <div class="mb-3 pt-6 mx-6">
+        <label class="block text-m text-left mb-2" for="apellidos">Apellidos:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="apellidos" type="text" placeholder="Apellidos" required [(ngModel)]="usuario.apellido" name="apellidos">
+      </div>
+      <div class="mb-3 mx-6">
+        <label class="block text-m text-left mb-2" for="dni">DNI:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="dni" type="text" placeholder="DNI" required [(ngModel)]="usuario.dni" name="dni">
+        <div *ngIf="usuario.dni && !isValidDNI(usuario.dni)" class="text-red-500">
+          El DNI debe tener 8 dígitos seguidos de una letra.
         </div>
-        <div class="mb-3 pt-6 mx-6">
-            <label class="block text-m text-left mb-2" for="apellidos">Apellidos:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="apellidos" type="text" placeholder="Apellidos" required [(ngModel)]="apellido" name="apellidos">
+      </div>
+      <div class="mb-3 mx-6">
+        <label class="block text-m text-left mb-2" for="email">Email:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="email" type="email" placeholder="Email" required [(ngModel)]="usuario.email" name="email">
+        <div *ngIf="usuario.email && !isValidEmail(usuario.email)" class="text-red-500">
+          Debe ser una dirección de correo electrónico válida.
         </div>
-        <div class="mb-3 mx-6">
-            <label class="block text-m text-left mb-2" for="dni">DNI:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="dni" type="text" placeholder="DNI" required [(ngModel)]="dni" name="dni">
+      </div>
+      <div class="mb-3 mx-6">
+        <label class="block text-m text-left mb-2" for="telefono">Teléfono:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="telefono" type="text" placeholder="Teléfono" required [(ngModel)]="usuario.telefono" name="telefono">
+        <div *ngIf="usuario.telefono && !isValidTelefono(usuario.telefono)" class="text-red-500">
+          El teléfono debe contener solo números y tener 9 dígitos.
         </div>
-        <div class="mb-3 mx-6">
-            <label class="block text-m text-left  mb-2" for="email">Email:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="email" type="email" placeholder="Email" required [(ngModel)]="email" name="email">
+      </div>
+      <div class="mb-3 mx-6">
+        <label class="block text-m text-left mb-2" for="contraseña">Contraseña:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+              id="contraseña" type="password" placeholder="Contraseña" required [(ngModel)]="usuario.contrasena" name="contrasena">
+        <div *ngIf="usuario.contrasena && !isValidContrasena(usuario.contrasena)" class="text-red-500">
+          La contraseña debe contener al menos una letra mayúscula, un número y tener al menos 8 caracteres.
         </div>
-        <div class="mb-3 mx-6">
-            <label class="block text-m text-left mb-2" for="telefono">Teléfono:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="telefono" type="text" placeholder="Teléfono" required [(ngModel)]="telefono" name="telefono">
-        </div>
-        <div class="mb-3 mx-6">
-            <label class="block text-m text-left mb-2" for="contraseña">Contraseña:</label>
-            <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                  id="contraseña" type="password" placeholder="Contraseña" required [(ngModel)]="contrasena" name="contrasena">
-        </div>
-        <div class="mb-3 mx-6">
-          <label class="block text-m text-left mb-2" for="fechaContratacion">Fecha de Contratación:</label>
-          <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                 id="fechaRegistro" type="date" placeholder="Fecha de Contratación" required [(ngModel)]="fechaRegistro" name="fechaRegistro">
-        </div>
-        <div class="mb-6 mx-6">
-            <label class="block text-m text-left mb-2" for="rol">Rol:</label>
-            <select class="appearance-none border w-60 rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
-                    id="rol" required [(ngModel)]="rol" name="rol">
-                <option value="trabajador">Trabajador</option>
-                <option value="encargado">Encargado</option>
-                <option value="administrador">Administrador</option>
-            </select>
-        </div>
-        <div class="flex items-center mx-auto justify-between mt-10">
-          <button class="bg-bright-red hover:bg-red-600 mx-auto text-white font-semibold text-lg py-3 px-8 rounded focus:outline-none focus:shadow-outline"
-                  type="submit">
-              Registrar
-          </button>
+      </div>
+      <div class="mb-3 mx-6">
+        <label class="block text-m text-left mb-2" for="fechaContratacion">Fecha de Contratación:</label>
+        <input class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+               id="fechaRegistro" type="date" placeholder="Fecha de Contratación" required [(ngModel)]="usuario.fechaRegistro" name="fechaRegistro">
+      </div>
+      <div class="mb-6 mx-6">
+        <label class="block text-m text-left mb-2" for="rol">Rol:</label>
+        <select class="appearance-none border w-60 rounded py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline"
+                id="rol" required [(ngModel)]="usuario.rol" name="rol">
+          <option value="trabajador">Trabajador</option>
+          <option value="encargado">Encargado</option>
+          <option value="administrador">Administrador</option>
+        </select>
+      </div>
+      <div class="flex items-center mx-auto justify-between mt-10">
+        <button class="boton hover:bg-red-600 mx-auto focus:outline-none focus:shadow-outline" type="submit">
+          Registrar
+        </button>
       </div>
     </form>
   </div>

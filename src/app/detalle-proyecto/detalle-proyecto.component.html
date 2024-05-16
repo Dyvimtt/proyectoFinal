@@ -5,6 +5,7 @@
       <hr class="border my-auto h-px border-dark-blue">
       <div class="mb-4 mt-10 text-lg grid gap-3">
         <div class="grid grid-col-1 gap-3">
+          <p><span class="font-bold mb-3">Id del proyecto:</span> {{ proyecto.id }}</p>
           <p><span class="font-bold mb-3">Nombre:</span> {{ proyecto.nombre }}</p>
           <p><span class="font-bold mb-3">Ciudad:</span> {{ proyecto.ciudad }}</p>
           <p><span class="font-bold mb-3">Fecha de inicio:</span> {{ proyecto.fechaInicio }}</p>
@@ -12,7 +13,7 @@
           <p><span class="font-bold mb-3">Presupuesto:</span><span class="font-semibold text-dark-blue pl-2"> {{ proyecto.presupuesto | currency: 'EUR' }}</span></p>
           <p><span class="font-bold mb-3">Balance actual:</span> <span class="font-semibold pl-2" [ngClass]="{'text-green-500': balanceActual >= 0, 'text-red-500': balanceActual < 0}">{{ balanceActual | currency: 'EUR' }}</span></p>
         </div>
-        <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline">Modificar proyecto</button>
+        <button class="ml-2 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline" routerLink="/panel-interno/reg-proyecto/{{ proyecto.id }}" >Modificar proyecto</button>
       </div>
     </div>
   </div>
@@ -39,7 +40,8 @@
               <td class="border">{{ factura.nombreDocumento }}</td>
               <td class="border font-bold" [ngClass]="{'text-green-500': factura.pagada, 'text-red-500': !factura.pagada}">{{ factura.pagada ? 'Sí' : 'No' }}</td>
               <td class="border">{{ factura.fechaSubida }}</td>
-              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border text-blue-600 font-semibold" routerLink="/panel-interno/mod-factura/{{factura.id}}">{{ factura.numFactura }}</td>
+              <td class="border " routerLink="/panel-interno/mod-factura/{{factura.id}}">{{ factura.numFactura }}</td>
               <td class="border">{{ factura.importe | currency: 'EUR' }}</td>
               <td class="border">
                 <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
@@ -47,7 +49,6 @@
             </tr>
           </tbody>
         </table>
-        <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Añadir Factura</button>
       </div>
       <div *ngIf="facturas.length === 0">
         <p>No hay facturas asociadas a este proyecto.</p>

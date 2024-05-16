@@ -66,19 +66,24 @@ export class UsuarioService {
 
   // Creamos una función para convertir los atributos de nuestro objeto a los nombres de las tablas de la BD
   convertirTrabajadorBD(usuario: any): any {
-
-    return {
+    const objetoConvertido: any = {
       first_name: usuario.nombre,
       second_name: usuario.apellido,
       DNI: usuario.dni,
       email_employee: usuario.email,
-      password_employee: usuario.contrasena,
       phone: usuario.telefono,
-      role: 'employee',
+      role: usuario.rol,
       hire_date: usuario.fechaRegistro,
       url_photo: usuario.url_photo
     };
-  }
+
+    // Verificar si la contraseña no está vacía ni es undefined antes de agregarla
+    if (usuario.contrasena !== '' && usuario.contrasena !== undefined) {
+      objetoConvertido.password_employee = usuario.contrasena;
+    }
+
+    return objetoConvertido;
+}
 
   // Enviamos los datos con HttpHeaders ya que la api espera recibir los datos en formato x-www-form-urlencoded
   registrarTrabajador(usuario: any): Observable<any> {
@@ -94,7 +99,7 @@ export class UsuarioService {
       }
     }
 
-    return this.http.post<any>('https://dyvim.site/employees', params.toString(), { headers });
+    return this.http.post<any>('https://dyvim.site/employees?register=true&suffix=employee', params.toString(), { headers });
   }
 
   buscarPorNombre(nombre: string): Observable<Usuario[]>{
@@ -118,6 +123,25 @@ export class UsuarioService {
       }
     })
   );
+  }
+
+  actualizarTrabajador(usuario: Usuario): Observable<any> {
+    const data = this.convertirTrabajadorBD(usuario);
+    console.log(data);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    let params = new HttpParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.append(key, data[key]);
+      }
+    }
+
+    // Asegúrate de que la URL incluye correctamente los parámetros esperados por tu API
+    const url = `https://dyvim.site/employees?id=${usuario.id}&nameId=id_employee`;
+
+    // Usamos 'params' como el cuerpo de la solicitud PUT, asegurándonos de que esté todo configurado correctamente
+    return this.http.put<any>(url, params.toString(), { headers });
   }
 }
 

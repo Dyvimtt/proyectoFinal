@@ -15,20 +15,27 @@ export class FacturaService{
 
   convertirFacturaBD(factura: any): any {
     return {
-      id_supplier: factura.proveedor,
+      id_supplier_document: factura.proveedor,
+      id_project_document: factura.proyecto,
+      id_document: factura.id,
       type: factura.tipo,
       paid: factura.estado,
       document_name: factura.nombre,
       budget_documents: factura.importe,
       due_date: factura.fechaSubida,
       num_invoice: factura.numeroFactura,
-      attachment_url: ''
+      attachment_url: factura.urlCaptura
     };
   }
 
   //Registro factura nueva
 
   registrarFactura(factura: any): Observable<any> {
+    if(factura.estado == 1){
+      factura.estado == "true";
+    }else{
+      factura.estado == "false";
+    }
     const data = this.convertirFacturaBD(factura);
     console.log(data);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
@@ -63,6 +70,32 @@ export class FacturaService{
             } as Factura));
           } else {
             throw new Error('No se encontraron resultados para el proveedor.');
+          }
+        })
+      );
+  }
+
+  //Buscar facturas por id de documento
+
+  obtenerFacturaPorIdDocumento(id: number): Observable<Factura[]> {
+    return this.http.get<any[]>(`https://dyvim.site/documents?linkTo=id_document&equalTo=${id}&select=*`)
+      .pipe(
+        map((response: any) => {
+          console.log('Respuesta de la API:', response);
+          const results = response.results; // Obtener el array de resultados
+          if (results && results.length > 0) {
+            return results.map((factura: any) => ({
+              id: factura.id_document,
+              id_proyecto: factura.id_project_document,
+              id_proveedor: factura.id_supplier_document,
+              nombreDocumento: factura.document_name,
+              fechaSubida: factura.due_date,
+              tipo: factura.type,
+              url: factura.attachment_url,
+              pagada : factura.paid,
+              importe: factura.budget_documents,
+              numFactura: factura.num_invoice
+            } as Factura));
           }
         })
       );
@@ -248,5 +281,24 @@ export class FacturaService{
         }
       })
     );
+  }
+
+  actualizarFactura(factura: Factura): Observable<any> {
+    const data = this.convertirFacturaBD(factura);
+    console.log(data);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    let params = new HttpParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.append(key, data[key]);
+      }
+    }
+
+    // Asegúrate de que la URL incluye correctamente los parámetros esperados por tu API
+    const url = `https://dyvim.site/documents?id=${factura.id}&nameId=id_document`;
+
+    // Usamos 'params' como el cuerpo de la solicitud PUT, asegurándonos de que esté todo configurado correctamente
+    return this.http.put<any>(url, params.toString(), { headers });
   }
 }

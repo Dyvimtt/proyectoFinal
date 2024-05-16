@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpEventType } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { Documento } from '../models/documento.model';
 import { Usuario } from '../models/usuario.model';
 import { DocumentoService } from '../services/documento.service';
+import { SubidaHttpService } from '../services/subidaHttp.service';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
@@ -15,10 +18,14 @@ export class DetalleUsuarioComponent implements OnInit {
   usuario: Usuario;
   documentos: Documento[];
 
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   constructor(
     private usuarioService: UsuarioService,
     private documentoService: DocumentoService,
-    private route: ActivatedRoute
+    private subidaHttpService: SubidaHttpService,
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {
     this.usuario = {
       id: 0,
@@ -69,5 +76,31 @@ export class DetalleUsuarioComponent implements OnInit {
     );
   }
 
-  abrirFormularioAgregarDocumento() {}
+  seleccionarArchivo(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  cambiarFoto(event: any): void {
+    const archivo = event.target.files[0];
+    if (archivo) {
+      const extension = archivo.name.split('.').pop();
+      const randomFilename = `foto_${new Date().getTime()}_${Math.floor(Math.random() * 10000)}.${extension}`;
+
+      this.subidaHttpService.subirArchivo(archivo, randomFilename).subscribe(response => {
+        if (response.type === HttpEventType.Response && response.body.success) {
+          const nuevaUrl = `https://dyvim.site/documents/${response.body.filename}`;
+          this.usuario.url_photo = nuevaUrl;
+          this.usuarioService.actualizarTrabajador(this.usuario).subscribe(() => {
+          }, error => {
+            this._snackBar.open('Error al actualizar la foto', 'Cerrar', { duration: 3000 });
+          });
+        } else {
+          this._snackBar.open('Subiendo la foto seleccionada', 'Cerrar', { duration: 3000 });
+        }
+      }, error => {
+        console.error('Error al subir el archivo:', error);
+        this._snackBar.open('Error al subir el archivo', 'Cerrar', { duration: 3000 });
+      });
+    }
+  }
 }

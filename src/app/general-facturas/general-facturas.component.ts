@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { Factura } from '../models/factura.model';
 import { FacturaService } from '../services/factura.service';
 
@@ -55,7 +56,9 @@ export class GeneralFacturasComponent implements OnInit {
   aplicarFiltroNoDinamico(): void {
     switch (this.filtroSeleccionado) {
       case 'antiguas':
-        this.facturaService.buscarFacturasPorFechaAsc().subscribe(
+        this.facturaService.buscarFacturasPorFechaAsc().pipe(
+          map(facturas => facturas.filter(factura => factura.pagada == "false"))
+        ).subscribe(
           facturas => this.facturasFiltradas = facturas,
           error => console.error('Error al buscar facturas:', error)
         );

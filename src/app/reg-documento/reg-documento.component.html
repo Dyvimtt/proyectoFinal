@@ -1,0 +1,29 @@
+<div class="h-1/2 w-1/2 mx-auto mt-2 p-10 flex-grow text-center">
+  <h2 class="text-4xl text-dark-blue font-bold mb-6">Registrar Documento</h2>
+  <hr class="border-dark-blue">
+  <div class="font-bold mx-auto mt-4 inline-block">
+    <form class="font-bold mx-auto grid grid-cols-1 gap-6" #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+      <div class="mx-2 mt-6">
+        <label class="block text-left mb-2" for="id">ID:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="id" [(ngModel)]="id" name="id" type="number" placeholder="ID" disabled>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="nombre">Nombre:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="nombre" [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="fechaSubida">Fecha de Subida:</label>
+        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline" id="fechaSubida" [(ngModel)]="fechaSubida" name="fechaSubida" type="date" placeholder="Fecha de Subida" required>
+      </div>
+      <div class="mx-2">
+        <label class="block text-left mb-2" for="archivo">Archivo:</label>
+        <input type="file" id="archivo" (change)="manejarArchivoSeleccionado($event)">
+      </div>
+      <div class="flex items-center justify-center">
+        <button class="bg-bright-red mt-6 hover:bg-red-600 text-white font-bold py-3 px-8 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Añadir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

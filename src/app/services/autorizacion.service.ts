@@ -27,10 +27,13 @@ export class AutorizacionService {
             id: response.results[0].id_employee,
             email: response.results[0].email_employee
           }));
+          console.log('Contenido de userToken:', localStorage.getItem('userToken'));
+          console.log('Contenido de userData:', localStorage.getItem('userData'));
         }
       })
     );
   }
+
 
   estaLogueado(): boolean {
     return !!localStorage.getItem('userToken');

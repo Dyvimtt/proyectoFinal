@@ -110,4 +110,21 @@ export class ProveedorService {
   );
   }
 
+  actualizarProveedor(proveedor: Proveedor): Observable<any> {
+    const data = this.convertirProveedorBD(proveedor);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    let params = new HttpParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.append(key, data[key]);
+      }
+    }
+
+    const url = `https://dyvim.site/suppliers?id=${proveedor.id_proveedor}&nameId=id_supplier`; // Reemplaza esto con la URL correcta de tu API
+
+    return this.http.put<any>(url, params.toString(), { headers });
+  }
+
+
 }

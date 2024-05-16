@@ -15,8 +15,7 @@
                (ngModelChange)="buscarPorFiltro()" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline focus:outline-red-800 focus:shadow-outline mt-2"
                type="text" [placeholder]="filtroSeleccionado === 'proveedor' ? 'Nombre del Proveedor' : 'Nombre del Proyecto'">
       </div>
-      <a routerLink="/panel-interno/reg-factura/"
-         class="bg-bright-red text-white font-bold py-2 mx-4 px-8 rounded focus:outline-none focus:shadow-outline mt-2">
+      <a routerLink="/panel-interno/reg-factura/" class="bg-bright-red hover:bg-red-600 text-white font-bold py-2 mx-4 px-8 rounded focus:outline-none focus:shadow-outline mt-2">
         Añadir Factura
       </a>
     </div>
@@ -25,22 +24,24 @@
       <table class="min-w-full border-collapse mt-10">
         <thead>
           <tr>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Proveedor</th>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Importe</th>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fecha de Subida</th>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Número de Factura</th>
-            <th class="px-6 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Documento</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Proveedor</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nombre factura</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Importe</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Fecha de Subida</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Número de Factura</th>
+            <th class="px-2 py-3 bg-gray-50  text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Documento</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let factura of facturasFiltradas">
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.id_proveedor }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200" [ngClass]="{'text-green-500': factura.pagada === '1', 'text-red-500': factura.pagada === '0'}">{{ factura.pagada === '1' ? 'Abonado' : 'Sin abonar' }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.importe | currency: 'EUR' }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.fechaSubida | date: 'dd/MM/yyyy' }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.numFactura }}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.id_proveedor }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.nombreDocumento }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200" [ngClass]="{'text-green-500': factura.pagada === 'true', 'text-red-500': factura.pagada === 'false'}">{{ factura.pagada === 'true' ? 'Abonado' : 'Sin abonar' }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.importe | currency: 'EUR' }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">{{ factura.fechaSubida | date: 'dd/MM/yyyy' }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200 text-blue-600 font-semibold" routerLink="/panel-interno/mod-factura/{{factura.id}}">{{ factura.numFactura }}</td>
+            <td class="px-2 py-4 whitespace-no-wrap border-b border-gray-200">
               <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:text-blue-800">Ver Documento</a>
             </td>
           </tr>

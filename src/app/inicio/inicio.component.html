@@ -1,6 +1,6 @@
 <div class="font-principal content">
   <header>
-    <nav class="h-20 container mx-auto flex items-center justify-between pt-6 mb-6">
+    <nav class="h-20 container mx-auto flex items-center justify-between pt-6 mb-6 relative z-50">
       <div class="w-1/3">
         <a class="flex max-w-[140px] items-center pr-16">
           <img src="assets/logo2.png" alt="logo Montaje Industrial Manises" class="w-20">
@@ -11,7 +11,7 @@
       <input type="checkbox" id="menu1" class="peer hidden" [(ngModel)]="isMenuOpen">
 
       <label for="menu1" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu z-50 md:hidden mr-3"></label>
-      <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform md:static md:bg-none md:translate-x-0 z-50">
+      <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform md:static md:bg-none md:translate-x-0 z-40">
         <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md text-center grid gap-6 font-bold text-dark-blue shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static">
           <li><a (click)="scrollToSection('seccion1')" class="hover:cursor-pointer">Inicio</a></li>
           <li><a (click)="scrollToSection('seccion2')" class="hover:cursor-pointer">Empresa</a></li>
@@ -20,7 +20,7 @@
           <li><a (click)="scrollToSection('seccion5')" class="hover:cursor-pointer">Contacto</a></li>
         </ul>
       </div>
-      <a routerLink="/login" class="hidden boton lg:block py-3 shadow-sm shadow-bright-red/30">Área privada</a>
+      <a routerLink="/login" class="hidden boton lg:block py-3 shadow-sm shadow-bright-red/30 hover:bg-red-600">Área privada</a>
     </nav>
 
     <section class="z-10 wrapper grid gap-8 justify-items-center items-center pb-12 pt-12 md:grid-cols-2 md:mb-20 md:mt-12 md:py-48 bg-cover bg-center text-white relative" style="background-image: url('assets/fotosProyectos/4edit.jpg');">
@@ -160,30 +160,32 @@
           Contacta con nosotros
         </h2>
         <div class="grid">
-          <form class="grid grid-cols-1 gap-4 text-very-light-gray font-semibold ">
+          <form #contactForm="ngForm" (ngSubmit)="enviarMensaje(contactForm)" class="grid grid-cols-1 gap-4 text-very-light-gray font-semibold">
             <div>
               <label for="nombre" class="block mb-1">Nombre:</label>
-              <input type="text" id="nombre" name="nombre" class="w-1/2 px-2 py-1 border rounded" required>
+              <input type="text" id="nombre" name="nombre" class="text-black w-1/2 px-2 py-1 border rounded" ngModel required>
             </div>
             <div>
               <label for="email" class="block mb-1">Correo electrónico:</label>
-              <input type="email" id="email" name="email" class="w-1/2 px-2 py-1 border rounded" required>
+              <input type="email" id="email" name="email" class="text-black w-1/2 px-2 py-1 border rounded" ngModel required>
             </div>
             <div>
-            <label for="sujeto" class="block mb-1">Asunto</label>
-            <input type="sujeto" id="sujeto" name="sujeto" class="w-1/2 px-2 py-1 border rounded" required>
+              <label for="sujeto" class="block mb-1">Asunto:</label>
+              <input type="text" id="sujeto" name="sujeto" class="text-black w-1/2 px-2 py-1 border rounded" ngModel required>
             </div>
             <div>
               <label for="mensaje" class="block mb-1">Mensaje:</label>
-              <textarea id="mensaje" name="mensaje" rows="4" class="w-1/2 px-2 py-1 border rounded" required></textarea>
+              <textarea id="mensaje" name="mensaje" rows="4" class="text-black w-1/2 px-2 py-1 border rounded" ngModel required></textarea>
             </div>
+            <button type="submit" class="mx-auto md:mx-0 mt-6 bg-very-light-gray font-semibold shadow-sm shadow-slate-200/30 boton text-bright-red">Enviar</button>
           </form>
-          <button type="submit" class="mx-auto md:mx-0 mt-6 bg-very-light-gray font-semibold shadow-sm shadow-slate-200/30 boton text-bright-red">Enviar</button>
-      </div>
+          <div *ngIf="mensaje"class="mt-4 text-white p-3">
+            {{ mensaje }}
+          </div>
+        </div>
       </div>
     </section>
   </main>
-
   <footer class="bg-very-dark-blue pt-12 pb-12">
     <section class="wrapper grid gap-8 justify-items-center footer-area px-6 md:footer-area-md md:grid-cols-3 md:justify-items-stretch">
       <nav class="grid grid-cols-[max-content_max-content] justify-between text-very-light-gray font-semibold w-3/5 gap-y-2 [grid-area:navigation] pl-12">

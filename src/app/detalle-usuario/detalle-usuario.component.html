@@ -1,7 +1,8 @@
-<div class="flex mx-auto h-1/2 w-auto mt-6 p-20 flex-grow py-8 ">
-  <div class= "w-1/2 ml-10 inline-block">
+<div class="flex mx-auto h-1/2 w-auto mt-6 p-20 flex-grow py-8">
+  <div class="w-1/2 ml-10 inline-block">
     <div class="w-1/2" *ngIf="usuario">
-      <img  class="h-40 mb-6 rounded-xl" src="{{usuario.url_photo}}" alt="Foto del empleado">
+      <img class="h-40 mb-6 rounded-xl cursor-pointer" [src]="usuario.url_photo" alt="Foto del empleado" (click)="seleccionarArchivo()" >
+      <input type="file" #fileInput (change)="cambiarFoto($event)" style="display: none;">
       <h2 class="text-2xl font-bold mb-4 text-dark-blue">Detalle empleado</h2>
       <hr class="border my-auto h-px border-dark-blue">
       <div class="mb-4 mt-10 text-lg grid gap-3">
@@ -14,7 +15,7 @@
         <p><span class="font-bold mb-3">Rol:</span> {{ usuario.rol }}</p>
         <p><span class="font-bold mb-3">Fecha de contratación:</span> {{ usuario.fechaRegistro }}</p>
       </div>
-      <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="abrirFormularioAgregarDocumento()">Modificar empleado</button>
+      <a class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" [routerLink]="'/panel-interno/editar-trabajador/' + usuario.id">Modificar empleado</a>
     </div>
     <div *ngIf="!usuario">
       <p>Cargando usuario...</p>
@@ -24,7 +25,7 @@
     <h2 class="text-2xl font-bold mb-4 text-dark-blue">Documentos del empleado</h2>
     <hr class="border border-dark-blue my-auto h-px">
     <div *ngIf="documentos.length > 0">
-      <table class="table-auto mt-10">
+      <table class="table-auto mt-10 mb-6">
         <thead>
           <tr class="bg-gray-300">
             <th class="px-4 py-2">Id del documento</th>
@@ -38,7 +39,7 @@
             <td class="border px-4 py-2">{{ documento.id }}</td>
             <td class="border px-4 py-2">{{ documento.nombre }}</td>
             <td class="border px-4 py-2">{{ documento.fechaSubida }}</td>
-            <td class="border px-4 py-2"><a href="{{ documento.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Documento</a></td>
+            <td class="border px-4 py-2"><a [href]="documento.url" target="_blank" class="text-blue-500 hover:underline">Ver Documento</a></td>
           </tr>
         </tbody>
       </table>
@@ -46,10 +47,15 @@
     <div *ngIf="documentos.length === 0">
       <p>No hay documentos asociados a este usuario.</p>
     </div>
-    <button class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="abrirFormularioAgregarDocumento()">Añadir documento</button>
+    <a class="ml-4 mt-10 bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" [routerLink]="'/panel-interno/reg-documento/' + usuario.id">Añadir documento</a>
   </div>
-
 </div>
+
+
+
+
+
+
 
 
 

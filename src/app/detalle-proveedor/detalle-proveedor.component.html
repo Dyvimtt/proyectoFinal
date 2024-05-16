@@ -9,8 +9,8 @@
         <p><span class="font-bold mb-3">Teléfono:</span> {{ proveedor.telefono }}</p>
         <p><span class="font-bold mb-3">Email:</span> {{ proveedor.email }}</p>
       </div>
-      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modificar proveedor</button>
-      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Añadir Factura</button>
+      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" routerLink="/panel-interno/reg-proveedor/{{proveedor.id_proveedor}}">Modificar proveedor</button>
+      <button class="ml-4 mt-10 text-base bg-bright-red hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" routerLink="/panel-interno/reg-factura/{{proveedor.id_proveedor}}">Añadir Factura</button>
     </div>
     <div *ngIf="!proveedor">
       <p>Cargando proveedor...</p>
@@ -40,11 +40,11 @@
               <td class="border" >{{ factura.tipo }}</td>
               <td class="border" >{{ factura.nombreDocumento }}</td>
               <td class="border font-bold" [ngClass]="{'text-green-500': factura.pagada}">Pagada</td>
-              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border" ><a class= "text-blue-600 font-semibold" routerLink="/panel-interno/mod-factura/{{factura.id}}">{{ factura.numFactura }}</a></td>
               <td class="border">{{ factura.importe }}</td>
               <td class="border">{{ factura.fechaSubida }}</td>
               <td class="border">
-                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
+                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 font-semibold hover:underline">Ver Factura</a>
               </td>
             </tr>
           </tbody>
@@ -76,15 +76,15 @@
           </thead>
           <tbody class="bg-gray-200 text-center px-2 py-2 ">
             <tr *ngFor="let factura of facturasPorPagar" class="border border-b-gray-800">
-              <td class="border">{{ factura.id }}</td>
+              <td class="border py-2">{{ factura.id }}</td>
               <td class="border">{{ factura.tipo }}</td>
               <td class="border">{{ factura.nombreDocumento }}</td>
               <td class="border font-bold" [ngClass]="{'text-red-600': factura.pagada}">Por Pagar</td>
-              <td class="border">{{ factura.numFactura }}</td>
+              <td class="border"><a class= "text-blue-600 font-semibold" routerLink="/panel-interno/mod-factura/{{factura.id}}">{{ factura.numFactura }}</a></td>
               <td class="border">{{ factura.importe }}</td>
               <td class="border">{{ factura.fechaSubida }}</td>
               <td class="border">
-                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline">Ver Factura</a>
+                <a href="{{ factura.url }}" target="_blank" class="text-blue-500 hover:underline font-semibold">Ver Factura</a>
               </td>
             </tr>
           </tbody>

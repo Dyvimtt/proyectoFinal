@@ -32,7 +32,7 @@ export class DetalleProveedorComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
       if (idParam) {
-        const proveedorId = +idParam; // Convertimos el parámetro de ruta a un número
+        const proveedorId = +idParam;
         this.cargarDetallesProveedor(proveedorId);
       } else {
         console.error('No se proporcionó un ID de proveedor válido.');
@@ -60,8 +60,8 @@ export class DetalleProveedorComponent implements OnInit {
       (facturas) => {
         this.facturas = facturas;
         console.log(facturas);
-        this.facturasPagadas = facturas.filter(factura => factura.pagada === "1");
-        this.facturasPorPagar = facturas.filter(factura => factura.pagada === "0");
+        this.facturasPagadas = facturas.filter(factura => factura.pagada === "true");
+        this.facturasPorPagar = facturas.filter(factura => factura.pagada === "false");
         console.log('Facturas del proveedor:', this.facturas);
         console.log('Facturas pagadas:', this.facturasPagadas);
         console.log('Facturas por pagar:', this.facturasPorPagar);
